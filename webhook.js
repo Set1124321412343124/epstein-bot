@@ -3,38 +3,32 @@ const config = require('./modules/config');
 
 // Импорты команд – теперь все в одном объекте для быстрого доступа
 const commands = {
-  // Админские и промо-команды
-  '/admin': require('./modules/start').handleAdminCommand,
-  '/promo': require('./modules/promo').handlePromoCommand,
-  '/createpromo': require('./modules/promo').handleCreatePromo,
-  '/promolist': require('./modules/promo').handlePromoList,
-  '/deletepromo': require('./modules/promo').handleDeletePromo,
-  '/nuke': require('./modules/nuke').handleNukeCommand,
+// Админские команды из start.js
+'/addsoap': require('./modules/start').handleAdminCommand,
+'/removesoap': require('./modules/start').handleAdminCommand,
+'/addchild': require('./modules/start').handleAdminCommand,
+'/removechild': require('./modules/start').handleAdminCommand,
+'/addbasement': require('./modules/start').handleAdminCommand,
+'/removebasement': require('./modules/start').handleAdminCommand,
+'/addmobilized': require('./modules/start').handleAdminCommand,
+'/removemobilized': require('./modules/start').handleAdminCommand,
 
-  // Игровые команды
-  '/farm': require('./modules/farm').handleFarmCommand,
-  '/children': require('./modules/children').handleChildrenCommand,
-  '/basement': require('./modules/children').handleBasementCommand,
-  '/svo': require('./modules/svo').handleSvoCommand,
-  '/casino': require('./modules/casino').handleCasinoCommand,
-  '/duel': require('./modules/duel').handleDuelCommand,
-  '/activity': require('./modules/activity').handleActivityCommand,
+// Базовые команды (добавьте, если они есть в других модулях)
+'/balance': require('./modules/start').handleBalanceCommand,      // если нет — создайте
+'/buybasement': require('./modules/children').handleBuyBasement,
+'/buychild': require('./modules/children').handleBuyChild,
 
-  // Топы
-  '/top': require('./modules/start').handleTopCommand,
-  '/topchildren': require('./modules/start').handleTopChildrenCommand,
-  '/topbasements': require('./modules/start').handleTopBasementsCommand,
-  '/topmobilized': require('./modules/start').handleTopMobilizedCommand,
-  '/topactivity': require('./modules/activity').handleTopActivityCommand,
+// Команды СВО (svo.js)
+'/mobilize': require('./modules/svo').handleMobilize,
+'/attack': require('./modules/svo').handleAttack,
+'/free': require('./modules/svo').handleFree,
+'/myarmy': require('./modules/svo').handleMyArmy,
+'/mycaptured': require('./modules/svo').handleMyCaptured,
 
-  // Стартовая
-  '/start': require('./modules/start').handleStartCommand,
-
-  // Переводы мыла/детей/бункеров – предполагается, что они экспортируются из соответствующих модулей
-  '/sendsoap': require('./modules/children').handleSendSoap,
-  '/sendchild': require('./modules/children').handleSendChild,
-  '/sendbasement': require('./modules/children').handleSendBasement,
-};
+// Команды ядерного оружия (nuke.js)
+'/buynuke': require('./modules/nuke').handleBuyNuke,
+'/launchnuke': require('./modules/nuke').handleLaunchNuke,
+'/mynukes': require('./modules/nuke').handleMyNukes,
 
 let duels = {};
 let adminCache = {};
